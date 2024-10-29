@@ -25,6 +25,6 @@ def get_db_connection(db_name=None):
         return None
 
 
-conn=get_db_connection()
-print(conn)
-conn.close()
+# conn=get_db_connection()
+# print(conn)
+# conn.close()
