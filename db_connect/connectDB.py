@@ -25,11 +25,3 @@ def get_db_connection(db_host=None,db_user=None,db_port=None,db_password=None,db
     except Exception as e:
         print(f"Error while connecting to the {DB_NAME} database: {e}")
         return None
-
-
-conn=get_db_connection(db_name='second_league')
-print(conn)
-conn.close()
-conn=get_db_connection(db_name='workingdb')
-print(conn)
-conn.close()
