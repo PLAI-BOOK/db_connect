@@ -5,28 +5,31 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-def get_db_connection(db_name=None):
+def get_db_connection(db_host=None,db_user=None,db_port=None,db_password=None,db_name=None):
     """Establish a connection to the database."""
-    DB_HOST = os.getenv("DB_HOST")
-    DB_USER = os.getenv("DB_USER")
-    DB_PORT = os.getenv("DB_PORT")
-    DB_PASSWORD = os.getenv("DB_PASSWORD")
-    db_name = db_name or os.getenv("DB_NAME").lower()
+    DB_HOST = db_host or os.getenv("DB_HOST")
+    DB_USER = db_user or os.getenv("DB_USER")
+    DB_PORT = db_port or os.getenv("DB_PORT")
+    DB_PASSWORD = db_password or os.getenv("DB_PASSWORD")
+    DB_NAME = db_name or os.getenv("DB_NAME").lower()
 
     try:
         conn = psycopg2.connect(
             host=DB_HOST,
             port=DB_PORT,
-            database=db_name,
+            database=DB_NAME,
             user=DB_USER,
             password=DB_PASSWORD
         )
         return conn
     except Exception as e:
-        print(f"Error while connecting to the {db_name} database: {e}")
+        print(f"Error while connecting to the {DB_NAME} database: {e}")
         return None
 
 
-conn=get_db_connection()
+conn=get_db_connection(db_name='second_league')
+print(conn)
+conn.close()
+conn=get_db_connection(db_name='workingdb')
 print(conn)
 conn.close()
